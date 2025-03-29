@@ -15,7 +15,6 @@
       height: 100vh;
       background: black;
       color: white;
-      transition: background 0.5s;
     }
     .container {
       background: rgba(20, 20, 20, 0.95);
@@ -30,98 +29,53 @@
     h2 {
       font-size: 26px;
       color: red;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 20px;
-      margin-bottom: 20px;
-      color: white;
     }
     input {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
-      border: none;
       border-radius: 5px;
       font-size: 16px;
     }
     button {
       width: 100%;
       padding: 12px;
-      border: none;
       border-radius: 5px;
-      color: white;
       font-size: 18px;
+      font-weight: bold;
       cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 10px;
     }
-    .btn-red {
-      background: red;
-    }
-    .btn-red:hover {
-      background: darkred;
-    }
-    .btn-green {
+    .btn-red { background: red; color: white; }
+    .btn-red:hover { background: darkred; }
+    .btn-green, .btn-blue {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      text-decoration: none;
-      background: #25D366;
       padding: 12px;
       border-radius: 5px;
       font-size: 18px;
       font-weight: bold;
       color: white;
-      transition: background 0.3s;
-    }
-    .btn-green img {
-      width: 24px;
-      height: 24px;
-    }
-    .btn-green:hover {
-      background: #1ebe5d;
-    }
-    .btn-blue {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
       text-decoration: none;
-      background: #0088cc;
-      padding: 12px;
-      border-radius: 5px;
-      font-size: 18px;
-      font-weight: bold;
-      color: white;
-      transition: background 0.3s;
     }
-    .btn-blue img {
-      width: 24px;
-      height: 24px;
-    }
-    .btn-blue:hover {
-      background: #007bb5;
-    }
-    .button-container {
-      margin-top: 20px;
-    }
+    .btn-green { background: #25D366; }
+    .btn-green:hover { background: #1ebe5d; }
+    .btn-blue { background: #0088cc; }
+    .btn-blue:hover { background: #007bb5; }
+    .button-container { margin-top: 20px; }
     #erro {
       display: none;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: #000000;
+      background-color: #000;
       padding: 10px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-      color: #ffffff;
+      color: #fff;
       font-size: 18px;
-    }
-    #erro.erro {
-      display: block;
     }
   </style>
 </head>
@@ -133,46 +87,26 @@
     <input type="password" id="password" placeholder="Senha">
     <button class="btn-red" onclick="login()">Entrar</button>
     <p>Ou</p>
-    <button class="btn-red" onclick="gerarTesteGratis()">Faça um teste de 3 dias</button>
-      <p>Faça a sua assinatura ou renove seu plano mensal</p>
+    <button class="btn-red" onclick="gerarTesteGratis()">Teste grátis por 3 dias</button>
+    <p>Faça a sua assinatura ou renove seu plano mensal</p>
     <div class="button-container">
-      <a id="whatsappLink" class="btn-green" href="https://wa.me/559999999999?text=Quero%20renovar%20minha%20associação%20ao%20serviço%20de%20filmes%20e%20séries!" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-        Assinar ou Renovar pelo WhatsApp
+      <a class="btn-green" href="https://wa.me/559999999999?text=Quero%20renovar%20minha%20associação!" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="24">
+        Assinar pelo WhatsApp
       </a>
-      <a id="telegramLink" class="btn-blue" href="https://t.me/559999999999?text=Quero%20renovar%20minha%20associação%20ao%20serviço%20de%20filmes%20e%20séries!" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Telegram_logo.svg" alt="Telegram">
-        Assinar ou Renovar pelo Telegram
+      <a class="btn-blue" href="https://t.me/559999999999?text=Quero%20renovar%20minha%20associação!" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Telegram_logo.svg" alt="Telegram" width="24">
+        Assinar pelo Telegram
       </a>
     </div>
   </div>
   <div id="erro"></div>
   <script>
     const users = {
-      "user1": {
-        password: "senha1",
-        ativo: false,
-        criadoEm: new Date().getTime(),
-        ip: null
-      },
-      "user2": {
-        password: "senha2",
-        ativo: false,
-        criadoEm: new Date().getTime(),
-        ip: null
-      },
-      "user3": {
-        password: "senha3",
-        ativo: false,
-        criadoEm: new Date().getTime(),
-        ip: null
-      },
-      "user4": {
-        password: "senha4",
-        ativo: true,
-        criadoEm: new Date('2025-02-23').getTime(),
-        ip: null
-      }
+      "user1": { password: "senha1", ativo: true },
+      "user2": { password: "senha2", ativo: false },
+      "user3": { password: "senha3", ativo: true },
+      "user4": { password: "senha4", ativo: true }
     };
 
     function login() {
@@ -180,90 +114,41 @@
       const password = document.getElementById('password').value;
 
       if (users[username] && users[username].password === password) {
-        const agora = new Date().getTime();
-        const expiracao = users[username].criadoEm + (30 * 24 * 60 * 60 * 1000);
-
         if (!users[username].ativo) {
-          document.getElementById('erro').classList.add('erro');
-          document.getElementById('erro').innerHTML = 'Sua assinatura expirou. Entre em contato para renovar.';
+          mostrarErro('Sua assinatura expirou. Entre em contato para renovar.');
           return;
         }
 
-        if (agora > expiracao) {
-          users[username].ativo = false;
-          document.getElementById('erro').classList.add('erro');
-          document.getElementById('erro').innerHTML = 'Sua assinatura expirou. Entre em contato para renovar.';
-          return;
-        }
-
-        fetch('https://api.ipify.org?format=json')
-          .then(response => response.json())
-          .then(data => {
-            const ip = data.ip;
-
-            if (users[username].ip && users[username].ip !== ip) {
-              document.getElementById('erro').classList.add('erro');
-              document.getElementById('erro').innerHTML = 'Acesso negado! Você já está logado em outro dispositivo.';
-              return;
-            }
-
-            users[username].ip = ip;
-            document.getElementById('erro').classList.add('erro');
-            document.getElementById('erro').innerHTML = 'Login realizado com sucesso!';
-            setTimeout(() => {
-              document.getElementById('erro').innerHTML = '';
-              document.getElementById('erro').classList.remove('erro');
-            }, 4000);
-          })
-          .catch(error => {
-            console.error("Erro ao obter IP:", error);
-            document.getElementById('erro').classList.add('erro');
-            document.getElementById('erro').innerHTML = 'Não foi possível obter seu IP. Tente novamente mais tarde.';
-          });
+        mostrarErro('Login realizado com sucesso! Redirecionando...');
+        setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
       } else {
-        document.getElementById('erro').classList.add('erro');
-        document.getElementById('erro').innerHTML = 'Usuário ou senha incorretos!';
+        mostrarErro('Usuário ou senha incorretos!');
       }
     }
 
     function gerarTesteGratis() {
-      // Verificar se o IP já foi usado para o teste grátis
-      const ipKey = 'testeGratisIP';
-      const ip = localStorage.getItem(ipKey);
-
-      if (ip) {
-        document.getElementById('erro').classList.add('erro');
-        document.getElementById('erro').innerHTML = 'Você já usou o teste grátis.';
-        return;
-      }
-
-      // Obter o IP do usuário via API
       fetch('https://api.ipify.org?format=json')
         .then(response => response.json())
         .then(data => {
-          // Armazenar o IP no localStorage
-          localStorage.setItem(ipKey, data.ip);
+          const ip = data.ip;
+          const ipUsado = localStorage.getItem('testeGratisIP');
 
-          // Criar o teste grátis
-          const username = "teste" + Math.floor(Math.random() * 10000);
-          const password = Math.random().toString(36).substring(2, 8);
-          const expira = new Date().getTime() + (3 * 24 * 60 * 60 * 1000);
+          if (ipUsado === ip) {
+            mostrarErro('Você já utilizou o teste grátis.');
+            return;
+          }
 
-          // Armazenar as informações do teste grátis no localStorage
-           localStorage.setItem('testeGratis', JSON.stringify({
-            username,
-            password,
-            expira
-          }));
-
-          document.getElementById('erro').classList.add('erro');
-          document.getElementById('erro').innerHTML = Teste criado!\\nUsuário: ${username}\\nSenha: ${password}\\nVálido por 3 dias.;
+          localStorage.setItem('testeGratisIP', ip);
+          mostrarErro('Teste criado! Usuário: <b>teste1234</b> | Senha: <b>abc123</b> | Válido por 3 dias.');
         })
-        .catch(error => {
-          console.error("Erro ao obter IP:", error);
-          document.getElementById('erro').classList.add('erro');
-          document.getElementById('erro').innerHTML = 'Não foi possível obter seu IP. Tente novamente mais tarde.';
-        });
+        .catch(() => mostrarErro('Erro ao obter IP.'));
+    }
+
+    function mostrarErro(mensagem) {
+      const erroDiv = document.getElementById('erro');
+      erroDiv.innerHTML = mensagem;
+      erroDiv.style.display = 'block';
+      setTimeout(() => { erroDiv.style.display = 'none'; }, 4000);
     }
   </script>
 </body>
