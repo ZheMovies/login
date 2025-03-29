@@ -102,20 +102,24 @@
   <div id="erro"></div>
   <script>
     const users = {
-      "user1": { password: "senha1", ativo: true, ip: null },
-      "user2": { password: "senha2", ativo: false, ip: null },
-      "user3": { password: "senha3", ativo: true, ip: null },
-      "user4": { password: "senha4", ativo: true, ip: null }
+      "user1": { password: "senha1", ativo: false, criadoEm: new Date().getTime(), ip: null },
+      "user2": { password: "senha2", ativo: false, criadoEm: new Date().getTime(), ip: null },
+      "user3": { password: "senha3", ativo: false, criadoEm: new Date().getTime(), ip: null },
+      "user4": { password: "senha4", ativo: true, criadoEm: new Date('2025-03-23').getTime(), ip: null }
     };function login() {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
+  const user = users[username];
 
-  if (users[username] && users[username].password === password) {
-    if (!users[username].ativo) {
+  if (user && user.password === password) {
+    const agora = new Date().getTime();
+    const expiracao = user.criadoEm + (30 * 24 * 60 * 60 * 1000);
+    
+    if (agora > expiracao) {
       mostrarErro('Sua assinatura expirou. Entre em contato para renovar.');
       return;
     }
-
+    
     mostrarErro('Login realizado com sucesso! Redirecionando...');
     setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
   } else {
@@ -128,16 +132,13 @@ function gerarTesteGratis() {
     .then(response => response.json())
     .then(data => {
       const ip = data.ip;
-      for (let user in users) {
-        if (users[user].ip === ip) {
-          mostrarErro('Você já utilizou o teste grátis.');
-          return;
-        }
+      if (localStorage.getItem('testeGratisIP') === ip) {
+        mostrarErro('Você já utilizou o teste grátis.');
+        return;
       }
-      
-      const testeUser = `teste${Math.floor(Math.random() * 10000)}`;
-      users[testeUser] = { password: "abc123", ativo: true, ip: ip };
-      mostrarErro(`Teste criado! Usuário: <b>${testeUser}</b> | Senha: <b>abc123</b> | Válido por 3 dias.`);
+
+      localStorage.setItem('testeGratisIP', ip);
+      mostrarErro('Teste criado! Usuário: <b>teste1234</b> | Senha: <b>abc123</b> | Válido por 3 dias.');
     })
     .catch(() => mostrarErro('Erro ao obter IP.'));
 }
