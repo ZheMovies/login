@@ -1,4 +1,5 @@
-ji<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -16,7 +17,6 @@ ji<!DOCTYPE html>
       background: black;
       color: white;
     }
-
     .container {
       background: rgba(20, 20, 20, 0.95);
       padding: 30px;
@@ -27,12 +27,17 @@ ji<!DOCTYPE html>
       width: 90%;
       border: 2px solid red;
     }
-
     h2 {
       font-size: 26px;
-      color: red;
     }
-
+    h2 span.vortex {
+      color: white;
+      text-shadow: 2px 2px 4px #000;
+    }
+    h2 span.play {
+      color: red;
+      text-shadow: 2px 2px 4px #000;
+    }
     input {
       width: 100%;
       padding: 12px;
@@ -40,7 +45,6 @@ ji<!DOCTYPE html>
       border-radius: 5px;
       font-size: 16px;
     }
-
     button {
       width: 100%;
       padding: 12px;
@@ -49,16 +53,13 @@ ji<!DOCTYPE html>
       font-weight: bold;
       cursor: pointer;
     }
-
     .btn-red {
       background: red;
       color: white;
     }
-
     .btn-red:hover {
       background: darkred;
     }
-
     .btn-green, .btn-blue {
       display: flex;
       align-items: center;
@@ -71,27 +72,21 @@ ji<!DOCTYPE html>
       color: white;
       text-decoration: none;
     }
-
     .btn-green {
       background: #25D366;
     }
-
     .btn-green:hover {
       background: #1ebe5d;
     }
-
     .btn-blue {
       background: #0088cc;
     }
-
     .btn-blue:hover {
       background: #007bb5;
     }
-
     .button-container {
       margin-top: 20px;
     }
-
     #erro {
       display: none;
       position: absolute;
@@ -105,7 +100,6 @@ ji<!DOCTYPE html>
       color: #fff;
       font-size: 18px;
     }
-
     #tela-boas-vindas {
       display: none;
       position: absolute;
@@ -117,7 +111,6 @@ ji<!DOCTYPE html>
       justify-content: center;
       align-items: center;
     }
-
     .container-boas-vindas {
       background-color: #000;
       padding: 20px;
@@ -134,13 +127,11 @@ ji<!DOCTYPE html>
       left: 50%;
       transform: translate(-50%, -50%);
     }
-
     #mensagem-boas-vindas {
       font-size: 24px;
       font-weight: bold;
       color: #fff;
     }
-
     .btn-ok {
       background-color: red;
       color: #fff;
@@ -150,7 +141,6 @@ ji<!DOCTYPE html>
       cursor: pointer;
       font-size: 18px;
     }
-
     .btn-ok:hover {
       background-color: darkred;
     }
@@ -158,8 +148,8 @@ ji<!DOCTYPE html>
 </head>
 <body>
   <div class="container">
-    <h2>Vortexplay </h2>
-    <p>Filmes e Séries por apenas R$ 4,99/mensal</p>
+    <h2><span class="vortex">Vortex</span><span class="play">play</span></h2>
+<p>Filmes e Séries por apenas R$ 4,99/mensal</p>
     <input type="text" id="username" placeholder="Usuário">
     <input type="password" id="password" placeholder="Senha">
     <button class="btn-red" onclick="login()">Entrar</button>
